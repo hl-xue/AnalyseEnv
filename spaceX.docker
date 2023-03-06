@@ -1,0 +1,12 @@
+FROM r-base
+
+ENV LC_ALL=C
+
+RUN export DEBIAN_FRONTEND=noninteractive \
+	&& apt-get update \
+	&& apt-get install -yq build-essential gcc
+
+RUN R -e "install.packages('remotes', dependencies=TRUE) \
+		remotes::install_github('rdevito/MSFA')"
+RUN R -e "install.packages('devtools', dependencies=TRUE) \
+		devtools::install_github('SatwikAch/SpaceX')"
