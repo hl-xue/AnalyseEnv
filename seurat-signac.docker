@@ -2,9 +2,12 @@ FROM r-base:4.2.2
 
 ENV LC_ALL=C
 
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update \
+    && apt-get install -yq build-essential libssl-dev libxml2-dev libcurl4-openssl-dev
 RUN R -e "install.packages('BiocManager')" \
-	&& R -e "BiocManager::install(version = '3.16')" \
-	&& R -e "BiocManager::install(c('BSgenome.Hsapiens.UCSC.hg38', 'EnsDb.Hsapiens.v86'))" 
+	&& R -e "BiocManager::install(version = '3.16', ask = FALSE)" \
+	&& R -e "BiocManager::install(c('BSgenome.Hsapiens.UCSC.hg38', 'EnsDb.Hsapiens.v86'), dependencies = TRUE, ask = FALSE)" 
 RUN R -e "setRepositories(ind=1:3)" \
 	&& R -e "install.packages(c('Seurat', 'Signac'))"
 RUN echo "Construction complete!"
