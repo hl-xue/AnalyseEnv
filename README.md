@@ -6,12 +6,23 @@ Build command
 docker build -t xuehl/seurat-signac:trisomy -f seurat-signac.docker --platform linux/amd64 .
 ```
 
-[Image on Docker Hub](https://hub.docker.com/layers/xuehl/seurat-signac/1.0.0/images/sha256-90ed69e42c79d48c8d20a9634ef712a90d1a1d0cee7f638ca1bd1f102bb894ab?context=explore)
+[Image on Docker Hub](https://hub.docker.com/repository/docker/xuehl/seurat-signac/general)
 
 ## Scarf
-Build command
+Build image
 ```bash
 docker build -t xuehl/scarf:trisomy -f scarf.docker --platform linux/amd64 --no-cache .
 ```
 
-[Image on Docker Hub]()
+Run container
+```bash
+docker run -it -p 8888:8888 -v $PWD:/analysis xuehl/scarf:trisomy bash
+```
+
+Launch jupyter lab
+```bash
+cd analysis/
+jupyter lab --ip 0.0.0.0 --port 8888 --no-browser --allow-root
+```
+
+[Image on Docker Hub](https://hub.docker.com/repository/docker/xuehl/scarf/general)
