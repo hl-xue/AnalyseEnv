@@ -1,9 +1,17 @@
 # DevEnv
 
+## Scanpy-Pegasus
+Build command
+```bash
+docker build -t xuehl/scanpy-pegasus:trisomy -f scanpy-pegasus.docker --platform linux/amd64 --no-cache .
+```
+
+[Image on Docker Hub](https://hub.docker.com/repository/docker/xuehl/scanpy-pegasus/general)
+
 ## Seurat-Signac
 Build command
 ```bash
-docker build -t xuehl/seurat-signac:trisomy -f seurat-signac.docker --platform linux/amd64 .
+docker build -t xuehl/seurat-signac:trisomy -f seurat-signac.docker --platform linux/amd64 --no-cache .
 ```
 
 [Image on Docker Hub](https://hub.docker.com/repository/docker/xuehl/seurat-signac/general)
