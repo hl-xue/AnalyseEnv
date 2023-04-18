@@ -5,7 +5,7 @@ ENV LC_ALL=C
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
     && apt-get install -yq build-essential libssl-dev libxml2-dev libcurl4-openssl-dev
-RUN R -e "install.packages('BiocManager')" \
+RUN R -e "install.packages(c('BiocManager', 'hdf5r'))" \
 	&& R -e "BiocManager::install(version = '3.16', ask = FALSE)" \
 	&& R -e "BiocManager::install(c('BSgenome.Hsapiens.UCSC.hg38', 'EnsDb.Hsapiens.v86'), dependencies = TRUE, ask = FALSE)" 
 RUN R -e "setRepositories(ind=1:3)" \

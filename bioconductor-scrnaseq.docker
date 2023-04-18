@@ -1,0 +1,11 @@
+FROM r-base:4.2.2
+
+ENV LC_ALL=C
+
+RUN export DEBIAN_FRONTEND=noninteractive \
+	&& apt-get update \
+	&& apt-get install -yq build-essential libssl-dev libxml2-dev libcurl4-openssl-dev
+RUN R -e "install.packages('BiocManager')" \
+	&& R -e "BiocManager::install(c('miQC', 'DropletUtils', 'scRNAseq', 'scater', 'splines'))" \
+	&& R -e "install.packages(c('flexmix'))"
+RUN echo "Construction complete!"
