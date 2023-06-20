@@ -11,8 +11,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& /opt/conda/bin/conda init bash
 ENV PATH=/opt/conda/bin:$PATH
 
-RUN conda install mamba -n base -c conda-forge \
-	&& mamba create -y -n pegasus -c conda-forge -c bioconda pegasuspy forceatlas2-python harmony-pytorch python=3 \
-	&& conda create -y -n scanpy -c conda-forge -c bioconda -c anaconda scanpy python-igraph leidenalg scrublet harmonypy python-decouple scvelo cellrank
+RUN conda install -y -c conda-forge -c bioconda -c anaconda scanpy python-igraph leidenalg scrublet harmonypy python-decouple scvelo cellrank pegasuspy forceatlas2-python harmony-pytorch python=3 
 
 RUN echo "Construction complete!"
