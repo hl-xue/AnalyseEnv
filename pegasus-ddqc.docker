@@ -12,6 +12,6 @@ RUN python3 -m pip install --upgrade pip \
 	&& git clone https://github.com/ayshwaryas/ddqc.git \
 	&& cd ddqc/ \
 	&& pip install . --no-cache \
-	&& pip install cython pegasuspy[forceatlas] pegasuspy[rpy2] harmony-pytorch --no-cache
+	&& pip install cython pegasuspy[forceatlas,rpy2,torch,scvi] scrublet --no-cache
 
 RUN echo "Construction complete!"
