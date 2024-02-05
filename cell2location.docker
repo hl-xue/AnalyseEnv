@@ -1,0 +1,19 @@
+FROM ubuntu:20.04
+
+ENV LC_ALL=C
+
+RUN export DEBIAN_FRONTEND=noninteractive \
+	&& apt-get update \
+	&& apt-get install -yq build-essential wget default-jdk \
+	&& wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ./miniconda.sh \
+	&& /bin/bash ./miniconda.sh -b -p /opt/conda \
+	&& rm -f ./miniconda.sh \
+	&& /opt/conda/bin/conda init bash
+ENV PATH=/opt/conda/bin:$PATH
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/conda/lib
+
+RUN conda create -n cell2loc -y python=3.9 \
+	&& echo "source activate cell2loc" >> ~/.bashrc
+
+RUN pip install cell2location[tutorials] \
+	&& echo "Construction complete!"
