@@ -1,20 +1,22 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ENV LC_ALL=C
 
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
 	&& apt-get -yq install build-essential wget \
-	&& apt -y install git \
 	&& wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ./miniconda.sh \
 	&& /bin/bash ./miniconda.sh -b -p /opt/conda \
 	&& rm -f ./miniconda.sh \
 	&& /opt/conda/bin/conda init bash
 ENV PATH=/opt/conda/bin:$PATH
 
-RUN git clone https://github.com/theislab/scarches.git \
-	&& conda env create -f scarches/envs/scarches_linux.yaml
-RUN conda install -c bioconda -c conda-forge -n scarches pegasuspy
+RUN conda create -n scarches python=3.9 \
+	&& python -m pip install --upgrade pip
+SHELL ["conda", "run", "-n", "scarches", "/bin/bash", "-c"]
 
+RUN conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia \
+	&& python3 -m pip install pegasuspy \
+	&& pip install -U scarches==0.5.10
 
 RUN echo "Construction complete!"
