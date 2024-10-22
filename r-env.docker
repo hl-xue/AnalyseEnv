@@ -1,5 +1,0 @@
-# pull the image
-docker pull rocker/rstudio:4.2.1
- 
-# run container
-docker run --rm -p 8888:8787 -e PASSWORD=password rocker/rstudio:4.2.1
